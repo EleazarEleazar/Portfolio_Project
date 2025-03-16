@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой Блог</title>
+</head>
+<body>
+<h1>Добро пожаловать в мой блог!</h1>
+<p>Здесь я делюсь своей жизнью:</p>
+
+<!-- Ссылка на twitter -->
+<p>
+    Instagram:
+    <a th:href="${twitter}" target="_blank">Тык</a>
+</p>
+
+<!-- Ссылка на Facebook -->
+<p>
+    Facebook:
+    <a th:href="${facebook}" target="_blank">Тык</a>
+</p>
+    <br>
+    <br>
+    <br>
+<p>
+    <!-- ссылка на главную страницу -->
+    <a th:href="@{/}">Вернуться на главную</a>
+</p>
+</body>
+</html>

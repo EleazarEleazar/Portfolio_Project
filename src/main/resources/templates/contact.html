@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Контакты</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <h1 th:text="${title}">Заголовок по умолчанию</h1>
+    <p th:text="${description}">Описание по умолчанию</p>
+    <h2>Мои Контакты:</h2>
+<ul>
+    <li th:each="contact : ${contacts}">
+        <strong th:text="${contact.type}">Тип контакта</strong>:
+        <span th:text="${contact.value}">Значение контакта</span>
+    </li>
+</ul>
+
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Вернуться</a></li>
+        <li><a th:href="@{/reviews}">Отзывы</a></li>
+        <li><a th:href="@{/blog}">Мой блог</a></li>
+    </ul>
+</nav>
+</body>
+</html>
