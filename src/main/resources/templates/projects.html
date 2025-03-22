@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои проекты</title>
+</head>
+<body>
+<h1>Мои проекты:</h1>
+
+<!-- Список проектов: -->
+<div th:each="project : ${projects}">
+    <h3 th:text="${project.title}">Название:</h3>
+    <p th:text="${project.description}">Описание:</p>
+    <a th:href="${project.url}" target="_blank">Ссылка на проект:</a>
+</div>
+
+<br>
+<br>
+
+<!-- Форма для добавления проекта -->
+<h2>Добавить новый проект</h2>
+<form th:action="@{/projects/add}" method="post">
+    <label for="add-title">Заголовок:</label>
+    <input type="text" id="add-title" name="title" required>
+    <br>
+    <label for="add-description">Описание:</label>
+    <textarea id="add-description" name="description"></textarea>
+    <br>
+    <label for="add-url">Ссылка на проект:</label>
+    <input type="url" id="add-url" name="url" required>
+    <br>
+    <button type="submit">Добавить проект</button>
+</form>
+
+<br>
+
+<!-- Форма для поиска проекта по названию -->
+<h2>Найти проект по названию</h2>
+<form th:action="@{/projects/search-by-title}" method="get">
+    <label for="search-title">Найти проект по названию:</label>
+    <input type="text" id="search-title" name="title" required>
+    <button type="submit">Найти</button>
+</form>
+
+<h2>Найти проект по URL</h2>
+<form th:action="@{/projects/search-by-url}" method="get">
+    <label for="search-url">Введите URL проекта:</label>
+    <input type="text" id="search-url" name="url" required>
+    <button type="submit">Найти</button>
+</form>
+
+<!-- Ссылка на главную -->
+<p>
+    <a th:href="@{/}">Вернуться на главную</a>
+</p>
+
+</body>
+</html>

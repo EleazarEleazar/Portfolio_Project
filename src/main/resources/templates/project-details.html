@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${project.title}">Детали проекта</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1 th:text="${project.title}">Название проекта</h1>
+<p th:text="${project.description}">Описание проекта</p>
+<a th:href="${project.url}" target="_blank" th:text="'Ссылка: ' + ${project.url}">Ссылка на проект</a>
+
+<!-- Форма для редактирования проекта -->
+<h2>Редактировать проект</h2>
+<form th:action="@{/projects/update}" method="post">
+    <input type="hidden" name="id" th:value="${project.id}">
+    <label for="edit-title">Название:</label>
+    <input type="text" id="edit-title" name="title" th:value="${project.title}" required>
+    <br>
+    <label for="edit-description">Описание:</label>
+    <textarea id="edit-description" name="description" th:text="${project.description}"></textarea>
+    <br>
+    <label for="edit-url">Ссылка:</label>
+    <input type="url" id="edit-url" name="url" th:value="${project.url}" required>
+    <br>
+    <button type="submit">Обновить проект</button>
+</form>
+
+<!-- Форма для удаления проекта -->
+<h2>Удалить проект</h2>
+<form th:action="@{/projects/delete}" method="post">
+    <input type="hidden" name="id" th:value="${project.id}">
+    <button type="submit">Удалить проект</button>
+</form>
+
+<!-- Ссылка на страницу со всеми проектами -->
+<p>
+    <a th:href="@{/projects}">Вернуться ко всем проектам</a>
+</p>
+</body>
+</html>

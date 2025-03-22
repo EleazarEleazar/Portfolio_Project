@@ -6,12 +6,13 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1 th:text="${title}"> Заголовок по умолчанию</h1>
+    <h1 th:text="${title}">Заголовок по умолчанию</h1>
     <p th:text="${description}">Описание по умолчанию</p>
 
 <nav>
     <ul>
-        <li><a th:href="@{/}">Главная</a> </li>
+        <li><a th:href="@{/}">Главная</a></li>
+        <li><a th:href="@{/projects}">Мои проекты</a></li>
         <li><a th:href="@{/blog}">Мой Блог</a></li>
         <li><a th:href="@{/contact}">Контакты</a></li>
         <li><a th:href="@{/reviews}">Отзывы</a></li>

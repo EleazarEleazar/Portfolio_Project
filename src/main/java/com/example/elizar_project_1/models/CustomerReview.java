@@ -16,8 +16,10 @@ public class CustomerReview {
 
     @Column(name = "title")
     private String title;
+
     @Column(name = "content")
     private String content;
+
     @Column(name = "rating")
     private int rating;
 
