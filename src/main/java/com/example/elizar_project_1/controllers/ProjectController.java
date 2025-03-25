@@ -6,36 +6,32 @@ import com.example.elizar_project_1.services.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/projects")
 public class ProjectController {
 
     private final ProjectServiceImpl projectService;
-    private final ProjectRepository projectRepository;
 
     @Autowired
-    public ProjectController(ProjectServiceImpl projectService, ProjectRepository projectRepository) {
+    public ProjectController(ProjectServiceImpl projectService) {
         this.projectService = projectService;
-        this.projectRepository = projectRepository;
     }
 
-    @GetMapping("/projects")
+    @GetMapping
     public String listProjects(Model model) {
         model.addAttribute("projects", projectService.getAllProjects());
         return "projects";
     }
 
-    @GetMapping("/projects/id/{id}")
+    @GetMapping("/id/{id}")
     public String getProjectById(@PathVariable Long id, Model model) {
         model.addAttribute("project", projectService.getProjectById(id));
         return "project-details";
     }
 
-    @PostMapping("/projects/add")
+    @PostMapping("/add")
     public String addProject(
             @RequestParam String title,
             @RequestParam String description,
@@ -46,7 +42,7 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-    @PostMapping("/projects/update")
+    @PostMapping("/update")
     public String updateProject(
             @RequestParam Long id,
             @RequestParam String title,
@@ -58,19 +54,19 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-    @PostMapping("/projects/delete")
+    @PostMapping("/delete")
     public String deleteProject(@RequestParam Long id) {
         projectService.deleteProjectById(id);
         return "redirect:/projects";
     }
 
-    @GetMapping("/projects/search-by-title")
+    @GetMapping("/search-by-title")
     public String findProjectByTitle(@RequestParam String title, Model model) {
         model.addAttribute("project", projectService.findProjectByTitle(title));
         return "project-details";
     }
 
-    @GetMapping("/projects/search-by-url")
+    @GetMapping("/search-by-url")
     public String findProjectByUrl(@RequestParam String url, Model model) {
         Project project = projectService.findProjectByUrl(url);
         model.addAttribute("project", project);

@@ -2,21 +2,127 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная Страница</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        .nav-container {
+            background-color: #2c3e50;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-item {
+            margin: 0;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        .nav-link:hover {
+            background-color: #34495e;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-title {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1 th:text="${title}">Заголовок по умолчанию</h1>
-    <p th:text="${description}">Описание по умолчанию</p>
+<div class="container">
+    <!-- Герой-секция -->
+    <section class="hero-section">
+        <h1 class="hero-title" th:text="${title}">Добро пожаловать на мой сайт!</h1>
+        <p class="hero-description" th:text="${description}">Вы на главной странице моего портфолио.</p>
+    </section>
 
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Главная</a></li>
-        <li><a th:href="@{/projects}">Мои проекты</a></li>
-        <li><a th:href="@{/blog}">Мой Блог</a></li>
-        <li><a th:href="@{/contact}">Контакты</a></li>
-        <li><a th:href="@{/reviews}">Отзывы</a></li>
-    </ul>
-</nav>
+    <!-- Навигация -->
+    <nav class="nav-container">
+        <ul class="nav-menu">
+            <li class="nav-item"><a th:href="@{/}" class="nav-link">Главная</a></li>
+            <li class="nav-item"><a th:href="@{/projects}" class="nav-link">Мои проекты</a></li>
+            <li class="nav-item"><a th:href="@{/blog}" class="nav-link">Мой Блог</a></li>
+            <li class="nav-item"><a th:href="@{/contact}" class="nav-link">Контакты</a></li>
+            <li class="nav-item"><a th:href="@{/reviews}" class="nav-link">Отзывы</a></li>
+        </ul>
+    </nav>
+
+    <!-- Блоки фич -->
+    <div class="features">
+        <div class="feature-card">
+            <h2 class="feature-title">Проекты</h2>
+            <p>Посмотрите мои последние работы и проекты, которые я разработал.</p>
+            <a th:href="@{/projects}" class="btn">Смотреть проекты</a>
+        </div>
+
+        <div class="feature-card">
+            <h2 class="feature-title">Блог</h2>
+            <p>Читайте мои статьи и мысли о разработке и современных технологиях.</p>
+            <a th:href="@{/blog}" class="btn">Читать блог</a>
+        </div>
+
+        <div class="feature-card">
+            <h2 class="feature-title">Отзывы</h2>
+            <p>Ознакомьтесь с отзывами о моей работе от клиентов и коллег.</p>
+            <a th:href="@{/reviews}" class="btn">Читать отзывы</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

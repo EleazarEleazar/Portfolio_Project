@@ -1,0 +1,21 @@
+.project {
+    transition: transform 0.3s;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+}
+
+.project h3 {
+    color: #3498db;
+    margin-bottom: 5px;
+}
+
+.project a[target="_blank"] {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #3498db;
+    color: white;
+    border-radius: 4px;
+}

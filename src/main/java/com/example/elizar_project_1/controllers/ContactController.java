@@ -4,13 +4,15 @@ import com.example.elizar_project_1.dto.ContactDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/contact")
 public class ContactController {
 
-    @GetMapping("/contact")
+    @GetMapping
     public String contact(Model model) {
         model.addAttribute("title", "Буду рад знакомству!");
         model.addAttribute("description", "*Звонки принимаю с 12:00 до 17:00");

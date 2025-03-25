@@ -4,36 +4,76 @@
     <meta charset="UTF-8">
     <title>Отзывы</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/reviews.css}">
 </head>
-
 <body>
 <h1>Отзывы</h1>
-<!-- Список отзывов -->
-<div th:each="review : ${reviews}" class="review">
-    <h3 th:text="${review.title}">Заголовок:</h3>
-    <p th:text="${review.content}">Текст отзыва:</p>
-    <p>Оценка: <span th:text="${review.rating}">0</span></p>
 
+<!-- Форма добавления отзыва -->
+<div class="form-container">
+    <h2>Добавить отзыв</h2>
+    <form th:action="@{/reviews/add}" method="post">
+        <div class="form-group">
+            <label for="title">Заголовок:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Содержание:</label>
+            <textarea id="content" name="content" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="rating">Оценка (0-10):</label>
+            <input type="number" id="rating" name="rating" min="0" max="10" required>
+        </div>
+        <button type="submit" class="btn">Добавить отзыв</button>
+    </form>
 </div>
 
-<!--Форма для заполнения отзыва -->
-<form th:action="@{/reviews/add}" method="post">
-    <label for="title">Заголовок:</label>
-    <input type="text" id="title" name="title" required>
-    <br>
-    <label for="content">Текст отзыва:</label>
-    <textarea id="content" name="content" required></textarea>
-    <br>
-    <label for="rating">Оценка (от 0 до 10):</label>
-    <input type="number" id="rating" name="rating" min="0" max="10" required>
-    <br>
-    <button type="submit">Добавь свой отзыв!</button>
-</form>
+<!-- Формы поиска -->
+<div class="search-forms">
+    <div class="search-form">
+        <h3>Поиск по заголовку</h3>
+        <form th:action="@{/reviews/search-by-title}" method="get">
+            <input type="text" name="title" placeholder="Введите заголовок" required>
+            <button type="submit" class="btn">Найти</button>
+        </form>
+    </div>
 
-<!-- Ссылка на главную страницу -->
-<p>
-    <a th:href="@{/}">Вернуться на главную</a>
-</p>
+    <div class="search-form">
+        <h3>Поиск по оценке</h3>
+        <form th:action="@{/reviews/search-by-rating}" method="get">
+            <input type="number" name="rating" min="0" max="10" placeholder="Введите оценку" required>
+            <button type="submit" class="btn">Найти</button>
+        </form>
+    </div>
+</div>
 
+<!-- Список отзывов -->
+<div th:if="${reviews == null or reviews.empty}">
+    <p class="empty-message">Нет доступных отзывов</p>
+</div>
+
+<div th:each="review : ${reviews}" class="review-card">
+    <h2>
+        <a th:href="@{'/reviews/' + ${review.id}}" th:text="${review.title}">Заголовок отзыва</a>
+    </h2>
+    <p th:text="${review.content}">Содержание отзыва</p>
+    <p>Оценка: <span class="rating" th:text="${review.rating}">0</span>/10</p>
+
+    <!-- Формы управления -->
+    <div class="review-actions">
+        <a th:href="@{'/reviews/' + ${review.id}}" class="btn btn-edit">Редактировать</a>
+
+        <form th:action="@{/reviews/delete}" method="post" style="display: inline-block;">
+            <input type="hidden" name="id" th:value="${review.id}">
+            <button type="submit" class="btn btn-delete">Удалить</button>
+        </form>
+    </div>
+</div>
+
+<!-- Возврат на главную -->
+<div class="back-to-home">
+    <a th:href="@{/}" class="btn btn-primary">На главную</a>
+</div>
 </body>
 </html>

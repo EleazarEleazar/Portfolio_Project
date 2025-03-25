@@ -15,6 +15,7 @@ public interface ProjectService {
 
     void deleteProjectById(Long id);
 
+    // мои кастомные методы из репозитория
     Project findProjectByTitle(String title);
 
     Project findProjectByUrl(String url);

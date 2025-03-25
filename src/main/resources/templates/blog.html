@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Мой Блог</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <h1>Добро пожаловать в мой блог!</h1>
 <p>Здесь я делюсь своей жизнью:</p>
 
 <!-- Ссылка на twitter -->
-<p>
+<div class="social-link">
     Twitter:
     <br>
-    <a th:href="${twitter}" target="_blank">Тык</a>
-</p>
+    <a th:href="${twitter}" target="_blank" class="social-button">Перейти</a>
+</div>
 
 <!-- Ссылка на Facebook -->
-<p>
+<div class="social-link">
     Facebook:
     <br>
-    <a th:href="${facebook}" target="_blank">Тык</a>
-</p>
-    <br>
-    <br>
-<p>
-    <!-- ссылка на главную страницу -->
-    <a th:href="@{/}">Вернуться на главную</a>
-</p>
+    <a th:href="${facebook}" target="_blank" class="social-button">Перейти</a>
+</div>
+
+<div class="back-link">
+    <a th:href="@{/}" class="button">Вернуться на главную</a>
+</div>
 </body>
 </html>

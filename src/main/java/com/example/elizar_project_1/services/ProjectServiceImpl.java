@@ -49,6 +49,7 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
     }
 
+    //мои кастомные методы
     @Override
     public Project findProjectByTitle(String title) {
         return projectRepository.findByTitle(title)

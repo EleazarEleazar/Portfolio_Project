@@ -17,6 +17,7 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
         this.customerReviewRepository = customerReviewRepository;
     }
 
+
     @Override
     public List<CustomerReview> getAllCustomersReview() {
         return customerReviewRepository.findAll();
@@ -28,5 +29,43 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
             throw new IllegalArgumentException("Rating must be between 0 and 10");
         }
         return customerReviewRepository.save(customerReview);
+    }
+
+    @Override
+    public CustomerReview getCustomerReviewById(Long id) {
+
+        return customerReviewRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Customer review not found"));
+    }
+
+    @Override
+    public CustomerReview updateCustomerReview(CustomerReview customerReview) {
+        if (!customerReviewRepository.existsById(customerReview.getId())) {
+            throw new IllegalArgumentException("Review for updating not found");
+        }
+        return customerReviewRepository.save(customerReview);
+    }
+
+    @Override
+    public void deleteCustomerReviewById(Long id) {
+        if (!customerReviewRepository.existsById(id)) {
+            throw new IllegalArgumentException("Review for deletion not found");
+        }
+        customerReviewRepository.deleteById(id);
+    }
+
+    //мои кастомные методы
+    @Override
+    public CustomerReview findReviewByRating(int rating) {
+
+        return customerReviewRepository.findByRating(rating)
+                .orElseThrow(() -> new IllegalArgumentException("No reviews found with that rating"));
+    }
+
+    @Override
+    public CustomerReview findReviewByTitle(String title) {
+
+        return customerReviewRepository.findByTitle(title)
+                .orElseThrow(() -> new IllegalArgumentException("No reviews found with that title"));
     }
 }
